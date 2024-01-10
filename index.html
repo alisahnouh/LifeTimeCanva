@@ -1,4 +1,4 @@
-﻿
+
 <!DOCTYPE html>
 <html lang="en-US" style="--plyr-color-main: #3ddd03">
   <head>
@@ -378,59 +378,3 @@
     <!--End of Tawk.to Script-->
   </body>
 </html>
-from bs4 import BeautifulSoup
-
-def add_template(html_content, template_path):
-    try:
-        # Load HTML content
-        soup = BeautifulSoup(html_content, 'html.parser')
-
-        # Read the template file
-        with open(template_path, 'r') as template_file:
-            template_content = template_file.read()
-
-        # Create a new BeautifulSoup object for the template
-        template_soup = BeautifulSoup(template_content, 'html.parser')
-
-        # Find the body tag in the template
-        template_body = template_soup.body
-
-        # Find the body tag in the existing HTML content
-        existing_body = soup.body
-
-        # Append the contents of the template body to the existing body
-        existing_body.extend(template_body.contents)
-
-        # Update the HTML content with the modified soup object
-        html_content = str(soup)
-
-        return html_content
-
-    except Exception as e:
-        return f"An error occurred: {str(e)}"
-
-
-# Example usage
-existing_html_content = """
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Online Store</title>
-</head>
-<body>
-    <h1>Welcome to My Online Store</h1>
-    <p>This is the existing content of the online store.</p>
-</body>
-</html>
-"""
-
-template_path = "path/to/your/template.html"
-
-# Call the function to add the template
-modified_html_content = add_template(existing_html_content, template_path)
-
-# Print or use the modified HTML content as needed
-print(modified_html_content)
